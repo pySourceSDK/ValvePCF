@@ -1,0 +1,3 @@
+[run]
+source = valvepcf/
+omit = valvepcf/__init__.py
