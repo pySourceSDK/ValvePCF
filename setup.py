@@ -4,7 +4,7 @@ setup(
     packages=['valvepcf'],
     version='1.0.0',
     license='gpl-3.0',
-    description='A library to parse .bsp files used by the source engine.',
+    description='A library to parse .pcf files used by the source engine.',
     author='Maxime Dupuis',
     author_email='mdupuis@hotmail.ca',
     # url='https://github.com/pySourceSDK/ValvePCF',
