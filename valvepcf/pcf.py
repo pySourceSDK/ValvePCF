@@ -21,3 +21,12 @@ class Pcf(object):
         if self.source_path:
             with open(path, 'rb') as f:
                 self.data = PCF.parse_stream(f)
+
+    def save(self, destination=None):
+        dest = destination or self.source_path
+
+        if not dest:
+            raise FileNotFoundError
+
+        with open(dest, 'wb') as f:
+            PCF.build_stream(self.data, f)
