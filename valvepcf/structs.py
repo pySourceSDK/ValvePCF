@@ -7,41 +7,31 @@ from builtins import range
 from future import standard_library
 standard_library.install_aliases()
 
-from collections import OrderedDict
-
 from construct import *
 
-PCFString = Switch(lambda ctx: ctx._root.binary_version,
-                   {2: CString('ascii'),
-                    3: CString('ascii'),
-                    4: Int16ul,
-                    5: Int16ul})
-
-PCFIdentifier = Switch(lambda ctx: ctx._root.binary_version,
-                       {2: Bytes(16),
-                        3: Bytes(16),
-                        4: Bytes(16),
-                        5: Bytes(20)})
 attribute_types = {
-    0: Int32sl,  # ATTRIBUTE_ELEMENT
-    1: Int32sl,  # ATTRIBUTE_INTEGER
+    1: Int32sl,  # ATTRIBUTE_ELEMENT
     2: Int32sl,  # ATTRIBUTE_INTEGER
     3: Float32l,   # ATTRIBUTE_FLOAT
     4: Flag,  # ATTRIBUTE_BOOLEAN
-    5: PCFString,  # ATTRIBUTE_STRING
+    5: Switch(lambda ctx: ctx._root.binary_version,
+              {2: CString('ascii'),
+               3: CString('ascii'),
+               4: Int16ul,
+               5: Int32ul}),  # ATTRIBUTE_STRING
     6: Sequence('length' / Int8ul,  # ATTRIBUTE_BINARY
                 'data' / Bytes(this.length)),
     7: Float32l,  # ATTRIBUTE_TIME
     8: Int8ul[4],  # ATTRIBUTE_COLOR
     9: Float32l[2],  # ATTRIBUTE_VECTOR2
     10: Float32l[3],  # ATTRIBUTE_VECTOR3
-    11: Float32l[4],  # ATTRIBUTE_VECTOR3
+    11: Float32l[4],  # ATTRIBUTE_VECTOR4
     12: Float32l[4],  # ATTRIBUTE_QANGLE
     13: Float32l[4],  # ATTRIBUTE_QUATERNION
     14: Float32l[4][4]  # ATTRIBUTE_MATRIX
 }
 
-for n in range(14):
+for n in range(1, 15):
     attribute_types[n+14] = Struct('count' / Int32sl,
                                    'array' / attribute_types[n][this.count])
 
@@ -54,12 +44,24 @@ def binary_version(version_string):
 CDmxElement = Struct(
     'typeNameIndex' / Int16ul * "Element Type as a string dict index",
     'typeName' / Computed(lambda ctx: ctx._root.strings[ctx.typeNameIndex]),
-    'elementName' / PCFString * 'Element Name as a string or a string dict index',
-    'dataSignature' / PCFIdentifier * "Globally unique identifier"
+    'elementName' / Switch(lambda ctx: ctx._root.binary_version,
+                           {2: CString('ascii'),
+                            3: CString('ascii'),
+                            4: Int16ul,
+                            5: Int16ul}) * 'Element Name as a string or a string dict index',
+    'dataSignature' / Switch(lambda ctx: ctx._root.binary_version,
+                             {2: Bytes(16),
+                              3: Bytes(16),
+                              4: Bytes(16),
+                              5: Bytes(20)}) * "Globally unique identifier"
 )
 
 CDmxAttribute = Struct(
-    'typeNameIndex' / Int16ul * 'String dictionary index',
+    'typeNameIndex' / Switch(this._root.binary_version,
+                             {2: Int16ul,
+                              3: Int16ul,
+                              4: Int16ul,
+                              5: Int32ul}) * 'String dictionary index',
     'typeName' / Computed(lambda ctx: ctx._root.strings[ctx.typeNameIndex]),
     'attributeType' / Int8ul,
     'attributeData' / Switch(this.attributeType, attribute_types)
