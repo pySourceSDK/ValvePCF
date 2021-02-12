@@ -14,13 +14,9 @@ attribute_types = {
     2: Int32sl,  # ATTRIBUTE_INTEGER
     3: Float32l,   # ATTRIBUTE_FLOAT
     4: Flag,  # ATTRIBUTE_BOOLEAN
-    5: Switch(lambda ctx: ctx._root.binary_version,
-              {2: CString('ascii'),
-               3: CString('ascii'),
-               4: Int16ul,
-               5: Int32ul}),  # ATTRIBUTE_STRING
-    6: Sequence('length' / Int8ul,  # ATTRIBUTE_BINARY
-                'data' / Bytes(this.length)),
+    5: Switch(lambda ctx: ctx._root.versions[0], {4: Int16ul, 5: Int32ul},
+              default=CString('ascii')),  # ATTRIBUTE_STRING
+    6: PrefixedArray(Int8ul, Byte),  # ATTRIBUTE_BINARY
     7: Float32l,  # ATTRIBUTE_TIME
     8: Int8ul[4],  # ATTRIBUTE_COLOR
     9: Float32l[2],  # ATTRIBUTE_VECTOR2
@@ -32,55 +28,36 @@ attribute_types = {
 }
 
 for n in range(1, 15):
-    attribute_types[n+14] = Struct('count' / Int32sl,
-                                   'array' / attribute_types[n][this.count])
+    attribute_types[n + 14] = PrefixedArray(Int32sl, attribute_types[n])
 
 
-def binary_version(version_string):
-    version = version_string.replace('<!-- dmx encoding binary ', '')
-    return int(version[0])
+def build_versions(versions):
+    return "<!-- dmx encoding binary {} format {} {} -->\n".format(*versions)
 
 
-CDmxElement = Struct(
-    'typeNameIndex' / Int16ul * "Element Type as a string dict index",
-    'typeName' / Computed(lambda ctx: ctx._root.strings[ctx.typeNameIndex]),
-    'elementName' / Switch(lambda ctx: ctx._root.binary_version,
-                           {2: CString('ascii'),
-                            3: CString('ascii'),
-                            4: Int16ul,
-                            5: Int16ul}) * 'Element Name as a string or a string dict index',
-    'dataSignature' / Switch(lambda ctx: ctx._root.binary_version,
-                             {2: Bytes(16),
-                              3: Bytes(16),
-                              4: Bytes(16),
-                              5: Bytes(20)}) * "Globally unique identifier"
-)
+def parse_versions(vstring):
+    return (int(vstring[25]), vstring[34:37], int(vstring[38]))
+
 
 CDmxAttribute = Struct(
-    'typeNameIndex' / Switch(this._root.binary_version,
-                             {2: Int16ul,
-                              3: Int16ul,
-                              4: Int16ul,
-                              5: Int32ul}) * 'String dictionary index',
-    'typeName' / Computed(lambda ctx: ctx._root.strings[ctx.typeNameIndex]),
+    'typeNameIndex' / Switch(this._root.versions[0], {5: Int32ul},
+                             default=Int16ul) * 'String dictionary index',
     'attributeType' / Int8ul,
-    'attributeData' / Switch(this.attributeType, attribute_types)
-)
+    'attributeData' / Switch(this.attributeType, attribute_types))
+
+CDmxElement = Struct(
+    'typeNameIndex' / Int16ul,
+    'elementName' / Switch(lambda ctx: ctx._root.versions[0], {4: Int16ul, 5: Int16ul},
+                           default=CString('ascii')),
+    'dataSignature' / Switch(lambda ctx: ctx._root.versions[0], {5: Bytes(20)},
+                             default=Bytes(16)) * "Globally unique identifier")
 
 PCF = Struct(
-    'version_string' / CString('ascii'),
-    'binary_version' / Computed(lambda ctx: binary_version(ctx.version_string)),
-    'string_count' / Rebuild(Switch(this.binary_version,
-                                    {2: Int16ul,
-                                     3: Int16ul,
-                                     4: Int32ul,
-                                     5: Int32ul}),
-                             len_(this.strings)),
-    'strings' / CString('ascii')[this.string_count],
-    'element_count' / Rebuild(Int32sl, len_(this.elements)),
-    'elements' / CDmxElement[this.element_count],
-    'element_attributes' / Struct(
-        'count' / Rebuild(Int32sl, len_(this.attributes)),
-        'attributes' / CDmxAttribute[this.count]
-    )[this.element_count]
-)
+    'version_string' / Rebuild(CString('ascii'),
+                               lambda ctx: build_versions(ctx.versions)),
+    'versions' / Computed(lambda ctx: parse_versions(ctx.version_string)),
+    'strings' / PrefixedArray(Switch(this._root.versions[0],
+                                     {4: Int32ul, 5: Int32ul},
+                                     default=Int16ul), CString('ascii')),
+    'elements' / PrefixedArray(Int32sl, CDmxElement),
+    'attributes' / PrefixedArray(Int32sl, CDmxAttribute)[len_(this.elements)])
