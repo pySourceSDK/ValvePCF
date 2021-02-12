@@ -195,5 +195,5 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 
 autodoc_member_order = 'bysource'
 autoclass_content = 'class'
-html_logo = 'pysourcesdk_plambda.png'
+html_logo = 'pysourcesdk_pcf.png'
 html_favicon = 'favicon.ico'
