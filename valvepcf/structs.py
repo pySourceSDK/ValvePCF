@@ -40,21 +40,21 @@ def parse_versions(vstring):
 
 
 CDmxAttribute = Struct(
-    'typeNameIndex' / Switch(this._root.versions[0], {5: Int32ul},
+    'attributeName' / Switch(this._root.versions[0], {5: Int32ul},
                              default=Int16ul) * 'String dictionary index',
     'attributeType' / Int8ul * "Determines the type of attributeData",
     'attributeData' / Switch(this.attributeType, attribute_types))
 
 CDmxElement = Struct(
-    'typeNameIndex' / Int16ul,
-    'elementName' / Switch(lambda ctx: ctx._root.versions[0], {4: Int16ul, 5: Int16ul},
+    'elementType' / Int16ul,
+    'elementDef' / If(lambda ctx: ctx._root.versions[0] == 5, Int16ul),
+    'elementName' / Switch(lambda ctx: ctx._root.versions[0], {4: Int16ul, 5: Int32ul},
                            default=CString('ascii')),
-    'unknown' / If(lambda ctx: ctx._root.versions[0] == 5, Int32ul),
-    'dataSignature' / Default(Bytes(16), lambda ctx: uuid.uuid4().bytes) * "Globally unique identifier")
+    'uniqueId' / Default(Bytes(16), lambda ctx: uuid.uuid4().bytes) * "Globally unique identifier")
 
 PCF = Struct(
     'versionString' / Rebuild(CString('ascii'),
-                              lambda ctx: build_versions(ctx.versions)),
+                              lambda ctx: build_versions(ctx._root.versions)),
     'versions' / Computed(lambda ctx: parse_versions(ctx.versionString)),
     'strings' / PrefixedArray(Switch(this._root.versions[0],
                                      {4: Int32ul, 5: Int32ul},
