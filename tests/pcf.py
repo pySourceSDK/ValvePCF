@@ -4,29 +4,29 @@ import unittest
 import tempfile
 import filecmp
 
+from construct import *
+
 from valvepcf.pcf import Pcf  # NOQA: #402
 
 
-class ParseBspTestCase(unittest.TestCase):
+def cmp_file(pcf, output_path):
+    pcf.save(output_path)
+    identical = filecmp.cmp(pcf.source_path,
+                            output_path,
+                            shallow=False)
+    return identical
+
+
+class ParsePcfTestCase(unittest.TestCase):
     def setUp(self):
         self.test_dir = tempfile.mkdtemp()
-        self.pcf_file = os.path.join(self.test_dir, 'test.pcf')
+        self.test_file = os.path.join(self.test_dir, 'test.pcf')
         return
 
     def tearDown(self):
         return
 
-    def test_struct_bsp(self):
-        pcf = Pcf('tests/data/test.pcf')
-
-        print(pcf.data)
-
-        nattrs = []
-        for eattrs in pcf.data.element_attributes:
-            for attr in eattrs.attributes:
-                if attr.attributeType not in nattrs:
-                    nattrs.append(attr.attributeType)
-
-        print(nattrs)
-
-        self.assertTrue(True)
+    def test_struct_pcf(self):
+        test_pcf = 'tests/data/test.pcf'
+        pcf = Pcf(test_pcf)
+        self.assertTrue(cmp_file(pcf, self.test_file))
