@@ -8,6 +8,7 @@ from future import standard_library
 standard_library.install_aliases()
 
 from construct import *
+import uuid
 
 attribute_types = {
     1: Default(Int32sl, 0) * "ATTRIBUTE_ELEMENT",
@@ -47,10 +48,11 @@ CDmxAttribute = Struct(
 
 CDmxElement = Struct(
     'elementType' / Int16ul,
-    'elementDef' / If(lambda ctx: ctx._root.versions[0] == 5, Int16ul),
-    'elementName' / Switch(lambda ctx: ctx._root.versions[0], {4: Int16ul, 5: Int32ul},
-                           default=CString('ascii')),
-    'uniqueId' / Default(Bytes(16), lambda ctx: uuid.uuid4().bytes) * "Globally unique identifier")
+    'elementDesc' / If(lambda ctx: ctx._root.versions[0] == 5, Int16ul),
+    'elementName' / Switch(lambda ctx: ctx._root.versions[0],
+                           {4: Int16ul, 5: Int32ul}, default=CString('ascii')),
+    'elementUUID' / Default(Bytes(16) * "Globally unique identifier",
+                            lambda ctx: uuid.uuid4().bytes))
 
 PCF = Struct(
     'versionString' / Rebuild(CString('ascii'),

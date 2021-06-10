@@ -3,30 +3,35 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-
-from builtins import int
 from builtins import open
 from future import standard_library
 standard_library.install_aliases()
-from builtins import object
 
-from valvepcf.structs import *
+from valvepcf.classes import *
+from valvepcf.loader import load_pcf
+from valvepcf.unloader import unload_pcf, save_pcf
 
 
-class Pcf(object):
+class Pcf(PcfRoot):
 
-    def __init__(self, path=None):
-        self.source_path = path
+    def __init__(self, origin=None):
+        self.source_path = origin
+        self._data = None  # raw parsed data
+
+        self.binary_format = None
+        self.binary_version = None
+        self.pcf_format = None
+        self.pcf_version = None
 
         if self.source_path:
-            with open(path, 'rb') as f:
-                self.data = PCF.parse_stream(f)
+            load_pcf(self)
 
     def save(self, destination=None):
         dest = destination or self.source_path
 
-        if not dest:
+        try:
+            d = open(dest, 'wb+')
+        except:
             raise FileNotFoundError
 
-        with open(dest, 'wb') as f:
-            PCF.build_stream(self.data, f)
+        save_pcf(self, dest)
