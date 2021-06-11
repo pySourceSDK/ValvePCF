@@ -1,7 +1,7 @@
-[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/pySourceSDK/ValveFGD/blob/master/LICENSE.txt)
-[![PyPI pyversions](https://img.shields.io/pypi/pyversions/valvefgd.svg)](https://pypi.python.org/pypi/valvefgd/)
-[![PyPI version fury.io](https://badge.fury.io/py/valvefgd.svg)](https://pypi.python.org/pypi/valvefgd/)
-[![alt text](https://github.com/pySourceSDK/ValveFGD/blob/master/docs/source/coverage.svg "coverage")]()
+[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/pySourceSDK/ValvePCF/blob/master/LICENSE.txt)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/valvepcf.svg)](https://pypi.python.org/pypi/valvepcf/)
+[![PyPI version fury.io](https://badge.fury.io/py/valvepcf.svg)](https://pypi.python.org/pypi/valvepcf/)
+[![alt text](https://github.com/pySourceSDK/ValvePCF/blob/master/docs/source/coverage.svg "coverage")]()
 
 # ValvePCF
 
