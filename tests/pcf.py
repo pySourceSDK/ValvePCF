@@ -16,6 +16,9 @@ def cmp_file(pcf, output_path):
                             shallow=False)
     return identical
 
+# Todo: add tests for version 2-5,
+#       make sure tests include child elements
+
 
 class ParsePcfTestCase(unittest.TestCase):
     def setUp(self):
@@ -30,3 +33,21 @@ class ParsePcfTestCase(unittest.TestCase):
         test_pcf = 'tests/data/test.pcf'
         pcf = Pcf(test_pcf)
         self.assertTrue(cmp_file(pcf, self.test_file))
+
+    def test_missing_dir(self):
+        test_pcf = 'tests/data/test.pcf'
+        pcf = Pcf(test_pcf)
+        dest = os.path.join(self.test_dir, 'missing/test.pcf')
+        with self.assertRaises(FileNotFoundError):
+            pcf.save(dest)
+
+    def test_missing_pcf(self):
+        missingfile = os.path.join(self.test_dir, 'nonexist.pcf')
+        with self.assertRaises(FileNotFoundError):
+            Pcf(missingfile)
+
+    def test_repr_pcf(self):
+        test_pcf = 'tests/data/test.pcf'
+        pcf = Pcf(test_pcf)
+        repr_str = str(pcf)
+        self.assertTrue(isinstance(repr_str, str))
