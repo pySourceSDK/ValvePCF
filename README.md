@@ -7,7 +7,7 @@
 
 ValvePCF is a Python library for parsing .pcf files for the Source Engine. It provides ways to read, modify and write pcf files.
 
-Full documentation: https://pysourcesdk.github.io/ValveFGD/
+Full documentation: https://pysourcesdk.github.io/ValvePCF/
 
 ## Installation
 
