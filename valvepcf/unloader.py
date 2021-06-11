@@ -36,7 +36,7 @@ def unload_pcf(pcf):
 
         elemlist.append(elem)
 
-        if isinstance(elem, PcfSystem):
+        if isinstance(elem, PcfSystemNode):
             for o in reversed([o for o in order if o in OPERATORS]):
                 if o == 'children':
                     for child in elem.children:
@@ -138,9 +138,9 @@ def unload_pcf(pcf):
                     if d != None and a_t in pcf._data.strings:
                         nattrs.append(refs_to_attr(d, a_t))
 
-        if isinstance(node, PcfSystem):
+        if isinstance(node, PcfSystemNode):
             register_system_node()
-        elif isinstance(node, PcfRoot):
+        elif isinstance(node, PcfRootNode):
             register_root()
         elif isinstance(node, PcfRefNode):
             register_children()

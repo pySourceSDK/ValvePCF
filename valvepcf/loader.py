@@ -146,10 +146,10 @@ def load_node_attributes(node, nattrs):
 
 
 TYPEMAP = {
-    'DmElement': PcfRoot,
-    'DmeElement': PcfRoot,
-    'DmeParticleSystemDefinition': PcfSystem,
-    'DmeParticleOperator': PcfOperator,
+    'DmElement': PcfRootNode,
+    'DmeElement': PcfRootNode,
+    'DmeParticleSystemDefinition': PcfSystemNode,
+    'DmeParticleOperator': PcfOperatorNode,
     'DmeParticleChild': PcfRefNode,
 }
 
@@ -160,7 +160,7 @@ def load_element(elem, strings):
     edesc = strings[elem.elementDesc]
     euuid = elem.elementUUID
     PClass = TYPEMAP[etype] if etype in TYPEMAP.keys() else PcfNode
-    return PClass(ename, etype, euuid, edesc)
+    return PClass(ename, etype, edesc, euuid)
 
 
 def load_attribute(attr, strings):

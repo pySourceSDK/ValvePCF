@@ -12,10 +12,21 @@ from valvepcf.loader import load_pcf
 from valvepcf.unloader import unload_pcf, save_pcf
 
 
-class Pcf(PcfRoot):
+class Pcf(PcfRootNode):
+    """
+    This is the basic class to interact with pcf files.
+    To interact with the data, consult :py:class:`PcfRootNode<PcfRootNode>`
+    which this class inherits
+    """
 
-    def __init__(self, origin=None):
-        self.source_path = origin
+    def __init__(self, path=None):
+        """
+        initalize a pcf file.
+
+        :param path: The location of the pcf file to be parsed
+        :type path: str
+        """
+        self.source_path = path  #: :type: (str) - The location of the parsed file.
         self._data = None  # raw parsed data
 
         self.binary_format = None
@@ -27,11 +38,12 @@ class Pcf(PcfRoot):
             load_pcf(self)
 
     def save(self, destination=None):
-        dest = destination or self.source_path
+        """Saves the current instance of the Pcf. Overwrites original pcf file if no destination is provided.
 
-        try:
-            d = open(dest, 'wb+')
-        except:
-            raise FileNotFoundError
+        :param destination: A path (directory + filename) to determine where to save the pcf file.
+        :type destination: str, optional
+        """
+
+        dest = destination or self.source_path
 
         save_pcf(self, dest)
