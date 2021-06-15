@@ -7,8 +7,8 @@ setup(
     description='A library to parse .pcf files used by the source engine.',
     author='Maxime Dupuis',
     author_email='mdupuis@hotmail.ca',
-    # url='https://github.com/pySourceSDK/ValvePCF',
-    # download_url='https://github.com/pySourceSDK/ValveBSP/archive/v1.0.0.tar.gz',
+    url='https://github.com/pySourceSDK/ValvePCF',
+    download_url='https://github.com/pySourceSDK/ValveBSP/archive/v1.0.0.tar.gz',
     keywords=['pcf', 'source', 'sourcesdk', 'hammer', 'valve'],
     install_requires=['construct', 'future'],
     classifiers=[
