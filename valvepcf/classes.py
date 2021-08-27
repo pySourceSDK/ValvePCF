@@ -3,6 +3,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+from builtins import hex
 from builtins import super
 from future import standard_library
 standard_library.install_aliases()
@@ -46,12 +47,12 @@ class PcfNode(object):
         :rtype: str
         """
 
-        type_ = type(self)
-        module = type_.__module__
-        qualname = type_.__qualname__
+        module_ = type(self).__module__
+        name_ = type(self).__name__
+        type_ = operator or self._type
         ret = "  " * indent
-        ret += f"<{module}.{qualname} {operator or self._type} named" + \
-            f" '{self._name}' at {hex(id(self))}>"
+        ret += "<{0}.{1} {2}".format(module_, name_, type_) + \
+               " named '{0}' at {1}>".format(self._name, hex(id(self)))
         return ret
 
 

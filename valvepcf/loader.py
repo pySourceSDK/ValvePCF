@@ -48,7 +48,7 @@ def load_pcf(pcf):
             load_node_operators(nodes[i], attrs[i], nodes)
         load_node_attributes(nodes[i], attrs[i])
 
-    root._unaccounted_strings = tracked_strings.unused.copy()
+    root._unaccounted_strings = list(tracked_strings.unused)
     root._order = load_order(data, tracked_strings)
 
     pcf._data = data
@@ -58,8 +58,8 @@ def load_pcf(pcf):
 class TrackedStrings(collectionsAbc.MutableMapping, list):
     # provides the list of parsed strings while tracking their usage
     def __init__(self, strings):
-        self._strs = strings
-        self.unused = strings.copy()
+        self._strs = list(strings)
+        self.unused = list(strings)
 
     def __getitem__(self, sid):
         if isinstance(sid, int):

@@ -30,7 +30,7 @@ def unload_pcf(pcf):
 
     relisted = []
     relisted.append(pcf)
-    systems = pcf.systems.copy()
+    systems = list(pcf.systems)
 
     def register_elem(elem, order, elemlist=[]):
 
@@ -94,7 +94,7 @@ def unload_pcf(pcf):
                 nattrs.append(pcfattr_to_attr(nattr))
 
         def register_root():
-            attrs_types = pcf._order.copy()
+            attrs_types = list(pcf._order)
 
             for a_t in attrs_types:
                 if a_t == 'attributes':
@@ -104,7 +104,7 @@ def unload_pcf(pcf):
                                                'particleSystemDefinitions'))
 
         def register_children():
-            attrs_types = pcf._order.copy()
+            attrs_types = list(pcf._order)
             for a_t in attrs_types:
                 if a_t == 'attributes':
                     register_attributes()
@@ -112,7 +112,7 @@ def unload_pcf(pcf):
                     nattrs.append(ref_to_attr(node.ref, 'child'))
 
         def register_system_node():
-            attrs_types = pcf._order.copy()
+            attrs_types = list(pcf._order)
 
             if 'material' in attrs_types:
                 material_attr = next(

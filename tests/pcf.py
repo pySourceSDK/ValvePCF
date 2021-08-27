@@ -38,12 +38,12 @@ class ParsePcfTestCase(unittest.TestCase):
         test_pcf = 'tests/data/test.pcf'
         pcf = Pcf(test_pcf)
         dest = os.path.join(self.test_dir, 'missing/test.pcf')
-        with self.assertRaises(FileNotFoundError):
+        with self.assertRaises(Exception):
             pcf.save(dest)
 
     def test_missing_pcf(self):
         missingfile = os.path.join(self.test_dir, 'nonexist.pcf')
-        with self.assertRaises(FileNotFoundError):
+        with self.assertRaises(Exception):
             Pcf(missingfile)
 
     def test_repr_pcf(self):
