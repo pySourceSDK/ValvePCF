@@ -4,7 +4,7 @@ Pcf Classes (How it all goes together)
 A pcf file is a collection of elements. Each element has a collection of Attributes. Here are the classes used to represent the various element types and their attributes.
 
 Representing pcf elements
-###########################
+#########################
 
 .. autoclass:: valvepcf.PcfNode
    :special-members: __init__, __repr__
