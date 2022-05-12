@@ -45,5 +45,5 @@ Parsing can be done by creating an instance of Pcf with a path.
 
 ```python
 >>> from valvepcf import Pcf
->>> pcf = Pcf('C:/Program Files (x86)/Steam/steamapps/common/Team Fortress 2/tf/particles/custom.pcf'
+>>> pcf = Pcf('C:/Program Files (x86)/Steam/steamapps/common/Team Fortress 2/tf/particles/custom.pcf')
 ```
