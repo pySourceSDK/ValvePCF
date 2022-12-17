@@ -10,7 +10,10 @@ setup(
     url='https://github.com/pySourceSDK/ValvePCF',
     download_url='https://github.com/pySourceSDK/ValvePCF/archive/v1.1.0.tar.gz',
     keywords=['pcf', 'source', 'sourcesdk', 'hammer', 'valve'],
-    install_requires=['construct', 'future'],
+    install_requires=['construct'],
+    extras_require={
+        ":python_version<='2.7'":  ["future"]
+    },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
