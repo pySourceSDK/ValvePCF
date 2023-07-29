@@ -1,7 +1,9 @@
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/pySourceSDK/ValvePCF/blob/master/LICENSE.txt)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/valvepcf.svg)](https://pypi.python.org/pypi/valvepcf/)
+[![Platforms](https://img.shields.io/badge/platform-Linux,_MacOS,_Windows-blue)]()
 [![PyPI version fury.io](https://badge.fury.io/py/valvepcf.svg)](https://pypi.python.org/pypi/valvepcf/)
-[![alt text](https://github.com/pySourceSDK/ValvePCF/blob/master/docs/source/coverage.svg "coverage")]()
+[![GitHub Workflow Status (with event)](https://github.com/pySourceSDK/ValvePCF/actions/workflows/CI.yml/badge.svg)]()
+[![Test coverage](https://github.com/pySourceSDK/ValvePCF/blob/master/docs/source/coverage.svg "coverage")]()
 
 # ValvePCF
 
@@ -37,7 +39,7 @@ python3 setup.py install
 
 ## Usage
 
-Here's a few example usage of valvePcf
+Here's a few example usage of ValvePCF
 
 ### Parsing
 
