@@ -1,15 +1,27 @@
 Welcome to ValvePCF's documentation!
 ====================================
 
+.. license
 .. image:: https://img.shields.io/badge/License-GPLv3-blue.svg
    :target: https://github.com/pySourceSDK/ValvePCF/blob/master/LICENSE.txt
 
+.. Python versions
 .. image:: https://img.shields.io/pypi/pyversions/valvepcf.svg
    :target: https://pypi.python.org/pypi/valvepcf/
 
+.. Platforms
+.. image:: https://img.shields.io/badge/platform-Linux,_MacOS,_Windows-blue
+   :target: https://pypi.python.org/pypi/valvepcf/
+
+.. Pypi version
 .. image:: https://badge.fury.io/py/valvepcf.svg
    :target: https://pypi.python.org/pypi/valvepcf/
 
+.. CI status
+.. image:: https://github.com/pySourceSDK/ValvePCF/actions/workflows/tests.yml/badge.svg
+   :target: https://github.com/pySourceSDK/ValvePCF/actions
+
+.. Coverage
 .. image:: coverage.svg
 
 ValvePCF is a Python library for parsing .pcf files for the Source Engine. It provides ways to read, modify and write pcf files.
@@ -43,4 +55,3 @@ Few things to know before diving in the code.
    :maxdepth: 2
 
    contributing
-
