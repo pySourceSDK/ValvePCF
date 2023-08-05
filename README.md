@@ -2,12 +2,12 @@
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/valvepcf.svg)](https://pypi.python.org/pypi/valvepcf/)
 [![Platforms](https://img.shields.io/badge/platform-Linux,_MacOS,_Windows-blue)]()
 [![PyPI version fury.io](https://badge.fury.io/py/valvepcf.svg)](https://pypi.python.org/pypi/valvepcf/)
-[![GitHub Workflow Status (with event)](https://github.com/pySourceSDK/ValvePCF/actions/workflows/tests.yml/badge.svg)]()
+[![GitHub Workflow Status (with event)](https://github.com/pySourceSDK/ValvePCF/actions/workflows/CI.yml/badge.svg)]()
 [![Test coverage](https://github.com/pySourceSDK/ValvePCF/blob/master/docs/source/coverage.svg "coverage")]()
 
 # ValvePCF
 
-ValvePCF is a Python library for parsing .pcf files for the Source Engine. It provides ways to read, modify and write pcf files.
+ValvePCF is a Python library designed to parse and edit .PCF files, which are utilized for storing particle effects data in Valve's Source engine.
 
 Full documentation: https://pysourcesdk.github.io/ValvePCF/
 
