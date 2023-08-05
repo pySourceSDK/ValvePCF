@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pcf Classes (How it all goes together) &#8212; ValvePCF 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=a0f8683c" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=af2ce170"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributing" href="../contributing.html" />
+    <link rel="prev" title="Pcf API (How it starts)" href="pcf.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="pcf-classes-how-it-all-goes-together">
+<h1>Pcf Classes (How it all goes together)<a class="headerlink" href="#pcf-classes-how-it-all-goes-together" title="Permalink to this heading">¶</a></h1>
+<p>A pcf file is a collection of elements. Each element has a collection of Attributes. Here are the classes used to represent the various element types and their attributes.</p>
+<section id="representing-pcf-elements">
+<h2>Representing pcf elements<a class="headerlink" href="#representing-pcf-elements" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="valvepcf.PcfNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">valvepcf.</span></span><span class="sig-name descname"><span class="pre">PcfNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">etype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edesc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>An abstract class to represent different types of pcf elements
+and hold their collections of attributes</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="valvepcf.PcfNode.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">etype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edesc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfNode.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfNode.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the element’s name</p></li>
+<li><p><strong>etype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the element’s type</p></li>
+<li><p><strong>edesc</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the element’s description</p></li>
+<li><p><strong>euuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the element’s uuid (autogenerated if not provided)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfNode._type">
+<span class="sig-name descname"><span class="pre">_type</span></span><a class="headerlink" href="#valvepcf.PcfNode._type" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>) - The element’s type.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfNode._name">
+<span class="sig-name descname"><span class="pre">_name</span></span><a class="headerlink" href="#valvepcf.PcfNode._name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>) - The element’s name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfNode._uuid">
+<span class="sig-name descname"><span class="pre">_uuid</span></span><a class="headerlink" href="#valvepcf.PcfNode._uuid" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>) - The element’s uuid (generally autogenerated).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfNode._desc">
+<span class="sig-name descname"><span class="pre">_desc</span></span><a class="headerlink" href="#valvepcf.PcfNode._desc" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>) - The element’s description.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfNode.attributes">
+<span class="sig-name descname"><span class="pre">attributes</span></span><a class="headerlink" href="#valvepcf.PcfNode.attributes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfAttribute" title="valvepcf.PcfAttribute">PcfAttribute</a>]) - The element’s list of attributes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="valvepcf.PcfNode.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfNode.__repr__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfNode.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>A printable summary of the PcfNode and its child nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A Python formated string.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="valvepcf.PcfRootNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">valvepcf.</span></span><span class="sig-name descname"><span class="pre">PcfRootNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">etype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edesc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfRootNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfRootNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#valvepcf.PcfNode" title="valvepcf.classes.PcfNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PcfNode</span></code></a></p>
+<p>PcfRootNode is the top level structure which includes a collection of
+<a class="reference internal" href="#valvepcf.PcfSystemNode" title="valvepcf.PcfSystemNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PcfSystemNode</span></code></a> as well as pcf format and schema versions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="valvepcf.PcfRootNode.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">etype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edesc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfRootNode.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfRootNode.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the element’s name</p></li>
+<li><p><strong>etype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the element’s type</p></li>
+<li><p><strong>edesc</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the element’s description</p></li>
+<li><p><strong>euuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the element’s uuid (autogenerated if not provided)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfRootNode.binary_format">
+<span class="sig-name descname"><span class="pre">binary_format</span></span><a class="headerlink" href="#valvepcf.PcfRootNode.binary_format" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>) Always ‘dmx’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfRootNode.binary_version">
+<span class="sig-name descname"><span class="pre">binary_version</span></span><a class="headerlink" href="#valvepcf.PcfRootNode.binary_version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>) Ranges from 2 to 5</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfRootNode.pcf_format">
+<span class="sig-name descname"><span class="pre">pcf_format</span></span><a class="headerlink" href="#valvepcf.PcfRootNode.pcf_format" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>) ‘dmx’ or ‘pcf’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfRootNode.pcf_version">
+<span class="sig-name descname"><span class="pre">pcf_version</span></span><a class="headerlink" href="#valvepcf.PcfRootNode.pcf_version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>) Ranges from 1 to 2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfRootNode.systems">
+<span class="sig-name descname"><span class="pre">systems</span></span><a class="headerlink" href="#valvepcf.PcfRootNode.systems" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfSystemNode" title="valvepcf.PcfSystemNode">PcfSystemNode</a>]) List of particle systems</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfRootNode.attributes">
+<span class="sig-name descname"><span class="pre">attributes</span></span><a class="headerlink" href="#valvepcf.PcfRootNode.attributes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfAttribute" title="valvepcf.PcfAttribute">PcfAttribute</a>]) - The element’s list of attributes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="valvepcf.PcfSystemNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">valvepcf.</span></span><span class="sig-name descname"><span class="pre">PcfSystemNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">etype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edesc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfSystemNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfSystemNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#valvepcf.PcfNode" title="valvepcf.classes.PcfNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PcfNode</span></code></a></p>
+<p>PcfSystemNode is used to define a pcf system which regroups multiple
+<a class="reference internal" href="#valvepcf.PcfOperatorNode" title="valvepcf.PcfOperatorNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PcfOperatorNode</span></code></a>. Operators are separated in specialized lists.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="valvepcf.PcfSystemNode.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">etype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edesc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfSystemNode.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfSystemNode.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the element’s name</p></li>
+<li><p><strong>etype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the element’s type</p></li>
+<li><p><strong>edesc</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the element’s description</p></li>
+<li><p><strong>euuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the element’s uuid (autogenerated if not provided)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfSystemNode.renderers">
+<span class="sig-name descname"><span class="pre">renderers</span></span><a class="headerlink" href="#valvepcf.PcfSystemNode.renderers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfOperatorNode" title="valvepcf.PcfOperatorNode">PcfOperatorNode</a>]) - list of renderers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfSystemNode.operators">
+<span class="sig-name descname"><span class="pre">operators</span></span><a class="headerlink" href="#valvepcf.PcfSystemNode.operators" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfOperatorNode" title="valvepcf.PcfOperatorNode">PcfOperatorNode</a>]) - list of operators</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfSystemNode.initializers">
+<span class="sig-name descname"><span class="pre">initializers</span></span><a class="headerlink" href="#valvepcf.PcfSystemNode.initializers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfOperatorNode" title="valvepcf.PcfOperatorNode">PcfOperatorNode</a>]) - list of initializers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfSystemNode.emitters">
+<span class="sig-name descname"><span class="pre">emitters</span></span><a class="headerlink" href="#valvepcf.PcfSystemNode.emitters" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfOperatorNode" title="valvepcf.PcfOperatorNode">PcfOperatorNode</a>]) - list of emmiters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfSystemNode.children">
+<span class="sig-name descname"><span class="pre">children</span></span><a class="headerlink" href="#valvepcf.PcfSystemNode.children" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfRefNode" title="valvepcf.PcfRefNode">PcfRefNode</a>]) - list of childrens</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfSystemNode.forces">
+<span class="sig-name descname"><span class="pre">forces</span></span><a class="headerlink" href="#valvepcf.PcfSystemNode.forces" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfOperatorNode" title="valvepcf.PcfOperatorNode">PcfOperatorNode</a>]) - list of forces</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfSystemNode.constraints">
+<span class="sig-name descname"><span class="pre">constraints</span></span><a class="headerlink" href="#valvepcf.PcfSystemNode.constraints" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfOperatorNode" title="valvepcf.PcfOperatorNode">PcfOperatorNode</a>]) - list of constraints</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfSystemNode.attributes">
+<span class="sig-name descname"><span class="pre">attributes</span></span><a class="headerlink" href="#valvepcf.PcfSystemNode.attributes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfAttribute" title="valvepcf.PcfAttribute">PcfAttribute</a>]) - The element’s list of attributes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="valvepcf.PcfOperatorNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">valvepcf.</span></span><span class="sig-name descname"><span class="pre">PcfOperatorNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">etype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edesc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfOperatorNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfOperatorNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#valvepcf.PcfNode" title="valvepcf.classes.PcfNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PcfNode</span></code></a></p>
+<p>PcfOperatorNode is used to hold specific collection of attributes for
+<a class="reference internal" href="#valvepcf.PcfSystemNode" title="valvepcf.PcfSystemNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PcfSystemNode</span></code></a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="valvepcf.PcfOperatorNode.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">etype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edesc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#valvepcf.PcfOperatorNode.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the element’s name</p></li>
+<li><p><strong>etype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the element’s type</p></li>
+<li><p><strong>edesc</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the element’s description</p></li>
+<li><p><strong>euuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the element’s uuid (autogenerated if not provided)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfOperatorNode.attributes">
+<span class="sig-name descname"><span class="pre">attributes</span></span><a class="headerlink" href="#valvepcf.PcfOperatorNode.attributes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfAttribute" title="valvepcf.PcfAttribute">PcfAttribute</a>]) - The element’s list of attributes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="valvepcf.PcfRefNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">valvepcf.</span></span><span class="sig-name descname"><span class="pre">PcfRefNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">etype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edesc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfRefNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfRefNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#valvepcf.PcfNode" title="valvepcf.classes.PcfNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PcfNode</span></code></a></p>
+<p>PcfRefNode is used to create child relationships between particle systems.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="valvepcf.PcfRefNode.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">etype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edesc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfRefNode.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfRefNode.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the element’s name</p></li>
+<li><p><strong>etype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – the element’s type</p></li>
+<li><p><strong>edesc</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the element’s description</p></li>
+<li><p><strong>euuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the element’s uuid (autogenerated if not provided)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfRefNode.ref">
+<span class="sig-name descname"><span class="pre">ref</span></span><a class="headerlink" href="#valvepcf.PcfRefNode.ref" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference internal" href="#valvepcf.PcfSystemNode" title="valvepcf.PcfSystemNode">PcfSystemNode</a>) - reference an other system</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfRefNode.attributes">
+<span class="sig-name descname"><span class="pre">attributes</span></span><a class="headerlink" href="#valvepcf.PcfRefNode.attributes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#valvepcf.PcfAttribute" title="valvepcf.PcfAttribute">PcfAttribute</a>]) - The element’s list of attributes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="representing-pcf-attributes">
+<h2>Representing pcf attributes<a class="headerlink" href="#representing-pcf-attributes" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="valvepcf.PcfAttribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">valvepcf.</span></span><span class="sig-name descname"><span class="pre">PcfAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>PcfAttribute represents an attribute held by an element.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="valvepcf.PcfAttribute.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvepcf/classes.html#PcfAttribute.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvepcf.PcfAttribute.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The attribute’s name.</p></li>
+<li><p><strong>type</strong> – The attribute’s type.</p></li>
+<li><p><strong>data</strong> – The attribute’s value.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfAttribute._name">
+<span class="sig-name descname"><span class="pre">_name</span></span><a class="headerlink" href="#valvepcf.PcfAttribute._name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>) - Name of the attribute</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfAttribute._type">
+<span class="sig-name descname"><span class="pre">_type</span></span><a class="headerlink" href="#valvepcf.PcfAttribute._type" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(int) - Ranges (1-28), defines the type of <a class="reference internal" href="#valvepcf.PcfAttribute._data" title="valvepcf.PcfAttribute._data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_data</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvepcf.PcfAttribute._data">
+<span class="sig-name descname"><span class="pre">_data</span></span><a class="headerlink" href="#valvepcf.PcfAttribute._data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The attribute’s value, can be one of many different types, must match <a class="reference internal" href="#valvepcf.PcfAttribute._type" title="valvepcf.PcfAttribute._type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_type</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/pysourcesdk_pcf.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">ValvePCF</a></h1>
+
+
+
+<p class="blurb">A <a href="https://pysourcesdk.github.io/hub/">pySourceSDK</a> project</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api_ref.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pcf.html">Pcf API (How it starts)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Pcf Classes (How it all goes together)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#representing-pcf-elements">Representing pcf elements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#representing-pcf-attributes">Representing pcf attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../api_ref.html">API</a><ul>
+      <li>Previous: <a href="pcf.html" title="previous chapter">Pcf API (How it starts)</a></li>
+      <li>Next: <a href="../contributing.html" title="next chapter">Contributing</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Maxime Dupuis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/api/classes.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
